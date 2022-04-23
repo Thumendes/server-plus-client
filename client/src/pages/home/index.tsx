@@ -1,9 +1,15 @@
 import { Header } from "../../components/Header";
 import { useForm } from "react-hook-form";
 import { sendMessageMutation } from "../../services/MessageService";
+import { useQuery } from "react-query";
+import { api } from "../../services/api";
 
 export const HomePage = () => {
   const { mutate, isSuccess, error, isLoading } = sendMessageMutation();
+  const { data } = useQuery("available", () => {
+    return api.get("/todos");
+  });
+
   const { register, handleSubmit } = useForm();
 
   function onSubmit(data: any) {
@@ -24,6 +30,8 @@ export const HomePage = () => {
   return (
     <>
       <Header title="Home" />
+
+      <pre>{JSON.stringify(data)}</pre>
 
       <div className="flex">
         <div className="p-6 rounded-lg bg-gray-800">

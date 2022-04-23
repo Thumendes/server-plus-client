@@ -13,6 +13,7 @@ type Message = z.infer<typeof Message>;
 export class BotService {
   async sendMessage(message: Message) {
     Message.parse(message);
+
     Logger.info(
       `Mandando mensagem ${Logger.bold(message.text)} para: ${message.channel}`
     );
