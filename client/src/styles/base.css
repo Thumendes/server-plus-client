@@ -1,0 +1,17 @@
+@tailwind base;
+
+@layer base {
+  main {
+    @apply dark:bg-gray-900 text-white min-h-screen;
+  }
+
+  h1 {
+    @apply text-2xl font-bold;
+  }
+
+  button,
+  input {
+    border: none;
+    outline: none;
+  }
+}

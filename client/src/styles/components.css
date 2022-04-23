@@ -1,0 +1,19 @@
+@tailwind components;
+
+@layer components {
+  .form {
+    @apply flex flex-col;
+  }
+
+  .input {
+    @apply transition-all px-3 py-2 rounded-md bg-inherit ring-1 ring-gray-500 focus:ring-2 focus:ring-blue-500;
+  }
+
+  .form-control {
+    @apply flex flex-col gap-1 mb-3;
+  }
+
+  .button {
+    @apply transition-all bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700;
+  }
+}
