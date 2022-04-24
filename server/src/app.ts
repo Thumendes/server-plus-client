@@ -37,7 +37,9 @@ export class App {
     const port = this.port;
 
     this.app.listen(port, () => {
-      Logger.success("Server started at:");
+      const mode = process.env.NODE_ENV;
+
+      Logger.success(`🚀 ${Logger.bold(mode)} server started at`);
       Logger.info(`> http://localhost:${Logger.bold(port)}`);
       Logger.divider();
     });

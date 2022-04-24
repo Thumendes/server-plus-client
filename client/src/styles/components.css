@@ -16,4 +16,8 @@
   .button {
     @apply transition-all bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700;
   }
+
+  .alert {
+    @apply text-white px-4 py-2 rounded-md;
+  }
 }

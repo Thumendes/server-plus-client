@@ -1,14 +1,10 @@
 import { Header } from "../../components/Header";
 import { useForm } from "react-hook-form";
-import { sendMessageMutation } from "../../services/MessageService";
-import { useQuery } from "react-query";
-import { api } from "../../services/api";
+import { sendMessageMutation } from "../../services/mutations";
+import { Link } from "react-router-dom";
 
 export const HomePage = () => {
   const { mutate, isSuccess, error, isLoading } = sendMessageMutation();
-  const { data } = useQuery("available", () => {
-    return api.get("/todos");
-  });
 
   const { register, handleSubmit } = useForm();
 
@@ -31,32 +27,48 @@ export const HomePage = () => {
     <>
       <Header title="Home" />
 
-      <pre>{JSON.stringify(data)}</pre>
+      {isLoading && (
+        <div className="alert bg-cyan-500">Enviando mensagem...</div>
+      )}
 
-      <div className="flex">
-        <div className="p-6 rounded-lg bg-gray-800">
-          <h1 className="mb-6">Enviar mensagem</h1>
+      {error && (
+        <div className="alert bg-red-500">Erro: {(error as Error).message}</div>
+      )}
 
-          {isLoading ? <div>Enviando...</div> : null}
-          {error ? <div>Erro ao enviar mensagem</div> : null}
-          {isSuccess ? <div>Mensagem enviada com sucesso</div> : null}
+      {isSuccess && (
+        <div className="alert bg-green-500">Mensagem enviada com sucesso!</div>
+      )}
 
-          <form onSubmit={handleSubmit(onSubmit)} className="form">
-            <div className="form-control">
-              <label htmlFor="text">Mensagem</label>
-              <input type="text" className="input" {...register("text")} />
-            </div>
+      <div className="flex flex-col items-start gap-6">
+        <h1>Enviar mensagem</h1>
 
-            <div className="form-control">
-              <label htmlFor="channel">Canal</label>
-              <input type="text" className="input" {...register("channel")} />
-            </div>
+        <form onSubmit={handleSubmit(onSubmit)} className="form">
+          <div className="form-control">
+            <label htmlFor="text">Mensagem</label>
+            <input
+              type="text"
+              placeholder="Mensagem"
+              className="input"
+              {...register("text")}
+            />
+          </div>
 
-            <button type="submit" className="button">
-              Enviar
-            </button>
-          </form>
-        </div>
+          <div className="form-control">
+            <label htmlFor="channel">Canal</label>
+            <input
+              type="text"
+              placeholder="Canal"
+              className="input"
+              {...register("channel")}
+            />
+          </div>
+
+          <button type="submit" className="button">
+            Enviar
+          </button>
+        </form>
+
+        <Link to="/todos">Ir para todos page</Link>
       </div>
     </>
   );

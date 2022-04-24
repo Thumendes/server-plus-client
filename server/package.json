@@ -29,6 +29,7 @@
     "morgan": "^1.10.0",
     "ora": "5",
     "reflect-metadata": "^0.1.13",
+    "rimraf": "^3.0.2",
     "zod": "^3.14.4"
   }
 }
